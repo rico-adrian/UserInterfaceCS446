@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+   <head>
+   
+    <script src="//lab.subinsb.com/projects/jquery/core/jquery-2.1.1.js"></script>
+    <script src="//lab.subinsb.com/projects/jquery/voice/recorder.js"></script>
+    <script src="//lab.subinsb.com/projects/jquery/voice/jquery.voice.min.js"></script>
+    <script src="cdn/record.js">var activeSong = document.getElementById("myVideo"); ;
+	var myaudio=new Audio('mysong.mp3');
+	// variable to store HTML5 audio element
+var music = document.getElementById('audio_player');
+  
+function playAudio() {
+  if (music.paused) {
+    music.play();
+    pButton.className = "";
+    pButton.className = "pause";
+  } else {
+    music.pause();
+    pButton.className = "";
+    pButton.className = "play";
+  }
+}
+	//Plays the song. Just pass the id of the audio element.
+function play(id){
+  //Sets the active song to the song being played. All other functions depend on this.
+  activeSong = document.getElementById(id);
+  //Plays the song defined in the audio tag.
+  activeSong.play();
+
+  //Calculates the starting volume percentage of the song.
+  var percentageOfVolume = activeSong.volume / 1;
+  var percentageOfVolumeMeter = document.getElementById('volumeMeter').offsetWidth * percentageOfVolume;
+
+  //Fills out the volume status bar.
+  document.getElementById('volumeStatus').style.width = Math.round(percentageOfVolumeSlider) + "px";
+}
+function pause(){
+  activeSong.pause();
+}
+var myAudio = document.getElementById("myAudio");
+var isPlaying = false;
+
+function togglePlay() {
+  if (isPlaying) {
+    myAudio.pause()
+  } else {
+    myAudio.play();
+  }
+};
+myAudio.onplaying = function() {
+  isPlaying = true;
+};
+myAudio.onpause = function() {
+  isPlaying = false;
+};
+	function restore(){
+  $("#record, #live").removeClass("disabled");
+  $(".one").addClass("disabled");
+  Fr.voice.stop();
+}
+$(document).ready(function(){
+  $(document).on("click", "#record:not(.disabled)", function(){
+    elem = $(this);
+    Fr.voice.record($("#live").is(":checked"), function(){
+      elem.addClass("disabled");
+	  Fr.voice.record(false, callback());
+      $("#live").addClass("disabled");
+      $(".one").removeClass("disabled");
+    });
+  });
+  
+  $(document).on("click", "#stop:not(.disabled)", function(){
+	Fr.voice.stop();
+    restore();
+  });
+  
+  $("#play").click(function(){
+    Fr.voice.export(function(url){
+      $("#audio").attr("src", url);
+	   activeSong = document.getElementById(id);
+	//Plays the song defined in the audio tag.
+	activeSong.play();
+	myaudio.play();
+	  document.getElementById('player').play();
+      $("#audio")[0].play();
+    }, "URL");
+    restore();
+	play(id);
+	togglePlay();
+  });
+  
+  $(document).on("click", "#pause:not(.disabled)", function(){
+    Fr.voice.export(function(url){
+	  document.getElementById('player').pause();
+      $("#audio").attr("src", url);
+      $("#audio")[0].play();
+	  activeSong.pause();
+	  myaudio.pause();
+    }, "URL");
+    restore();
+	pause();
+  });
+  $(document).on("click", "#restart:not(.disabled)", function(){
+    Fr.voice.export(function(url){
+      $("#audio").attr("src", url);
+      $("#audio")[0].play();
+	  myaudio.currentTime=0;
+    }, "URL");
+    restore();
+  });
+  
+  
+  
+});
+</script>
+   </head>
+   <body>
+    <div id="content">
+      <h2>Record, Play & Restart Microphone Voice</h2>
+      <audio controls="controls" id="audio_player">
+	  <embed height="60" type="audio/midi" width="144" src="audio.mp3" volume="60" loop="false" autostart="false" />
+	<source src="assets_tutorials/media/Loreena_Mckennitt_Snow_56bit.mp3" type="audio/mpeg">
+	<source src="assets_tutorials/media/Loreena_Mckennitt_Snow_56bit.ogg" type="audio/ogg">
+	Your browser does not support the audio tag.
+</audio>
+	  <div id="audioplayer" style="border: 1px solid black">
+  <button id="pButton" class="play" onclick="playAudio()"></button>
+    <div id="timeline">
+    <div id="playhead"></div>
+  </div>
+  <div id="volume_control">
+    <label id="rngVolume_label" for="rngVolume">Volume:</label>
+    <input type="range" onchange="setVolume(this.value)" id="rngVolume" min="0" max="1" step="0.01" value="1">
+  </div>
+</div>
+      <div style="margin:10px;">
+	  <a class="button" id="record" >Record</a>
+      <a class="button" id="play" onClick="document.getElementById('audio').play()"> <div id="songPlay" onclick="play('song')">Play</div></a>
+      <a class="button" id="pause"><div id="songPause" onclick="pause()">Pause</div></a>
+      <a class="button" id="stop">Stop</a>
+      <a class="button" id="restart">Restart</a>
+      </div>
+      <input class="button" type="checkbox" id="live"/>
+      <label for="live">Live Output</label>
+      <style>
+      .button{
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0px 5px;
+        padding: 5px 12px;
+        cursor: pointer;
+        outline: none;
+        font-size: 13px;
+        text-decoration: none !important;
+        text-align: center;
+        color:#fff;
+        background-color: #4D90FE;
+        background-image: linear-gradient(top,#4D90FE, #4787ED);
+        background-image: -ms-linear-gradient(top,#4D90FE, #4787ED);
+        background-image: -o-linear-gradient(top,#4D90FE, #4787ED);
+        background-image: linear-gradient(top,#4D90FE, #4787ED);
+        border: 1px solid #4787ED;
+        box-shadow: 0 1px 3px #BFBFBF;
+      }
+      a.button{
+        color: #fff;
+      }
+	  #songPlay{
+
+      }
+	  #songPause{
+
+	  }
+      .button:hover{
+        box-shadow: inset 0px 1px 1px #8C8C8C;
+      }
+      .button.disabled{
+        box-shadow:none;
+        opacity:0.7;
+      }
+      </style>
+    </div>
+   </body>
+</html>

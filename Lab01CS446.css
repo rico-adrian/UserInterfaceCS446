@@ -1,0 +1,21 @@
+body {
+    background-color:#CCC
+    background-image: url(Rico.jpg);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+#tablestyle1 {
+    background-image: url(Rico.jpg );
+    width: 300px;
+    height: 300px;
+    
+    
+}
+img {
+	position: below;
+}
+
+h2{
+	color:blue
+
+}
