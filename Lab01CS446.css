@@ -1,3 +1,4 @@
+<style type="text/css">
 body {
     background-color:#CCC
     background-image: url(Rico.jpg);
@@ -11,11 +12,74 @@ body {
     
     
 }
+.success { 
+	background-color: cornflowerblue; 
+}
+a:hover {
+		background-color:yellow
+		border-top: blue
+}
+form { 
+	width: 400px; 
+}
+
+label { 
+	float: left; width: 150px; 
+}
+
+
 img {
 	position: below;
+}
+
+.left {
+	width:240px;
+	height:123px;
+	float:left;
+}
+.right {
+	width:240px;
+	height:123px;
+	float:right;
+}
+fieldset{
+border:none;
+width:500px;
+margin:0px auto;
+}
+label {
+	width: 4em;
+	float: left;
+	text-align: right;
+	margin-right: 0.5em;
+	display: block
+
+
+}
+.row1 {
+	background-color:yellow;
+}
+.row2 {
+	background-color:red;
+}
+.row3 {
+	background-color:orange;
+}
+.row4 {
+	background-color:cyan;
+}
+.clear { 
+	clear: both; 
+	height: 0; 
+	line-height: 0; 
+}
+
+.floatright {
+	float: right;
 }
 
 h2{
 	color:blue
 
 }
+</style>
